@@ -1,0 +1,31 @@
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ["a1", "a2"]
+        scala: ["3.x", "2.13.x"]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: sbt/setup-sbt@v1
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: adopt
+    - run: sbt -v -J-Xmx10G
+           "++ ${{ matrix.scala }}"
+           "project ${{ matrix.project }}"
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
+           clean sources compile
